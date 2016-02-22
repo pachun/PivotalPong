@@ -46,4 +46,17 @@ class RecentGamesUITests: XCTestCase {
         XCTAssert(topCellTexts["Jen is a ruler!!"].exists)
         XCTAssert(bottomCellTexts["Shanfan is a ruler!!"].exists)
     }
+    
+    func test_persistsRecentGames() {
+        app.buttons["Create Game"].tap()
+        XCTAssert(app.staticTexts["Log Game"].exists)
+        app.cells.staticTexts["Shanfan"].tap()
+        XCTAssert(app.staticTexts["Pivotal Pong Rulerz!!"].exists)
+        XCTAssert(app.cells.staticTexts["Shanfan is a ruler!!"].exists)
+        
+        app.terminate()
+        app.launch()
+        
+        XCTAssert(app.cells.staticTexts["Shanfan is a ruler!!"].exists)
+    }
 }

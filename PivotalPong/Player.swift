@@ -8,6 +8,26 @@
 
 import Foundation
 
-struct Player {
+class Player: NSObject, NSCoding {
     let name: String
+    
+    init(name:String) {
+        self.name = name
+        
+        super.init()
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(name, forKey: "name")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        if let name = aDecoder.decodeObjectForKey("name") as? String {
+            self.name = name
+        } else {
+            self.name = ""
+        }
+        
+        super.init()
+    }
 }

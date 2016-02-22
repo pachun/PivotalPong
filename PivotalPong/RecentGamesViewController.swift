@@ -31,6 +31,8 @@ class RecentGamesViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadWinners()
+        
         recentGamesView.gamesTable.delegate = self
         recentGamesView.gamesTable.dataSource = self
         
@@ -50,7 +52,23 @@ class RecentGamesViewController: UIViewController, UITableViewDelegate, UITableV
     
     func logGameWinner(winner: Player) {
         winners.insert(winner, atIndex: 0)
+        saveWinners()
         recentGamesView.gamesTable.reloadData()
+    }
+   
+    private func loadWinners() {
+        if let storedWinners = NSKeyedUnarchiver.unarchiveObjectWithFile(winnersFile()) as? [Player] {
+            winners = storedWinners
+        }
+    }
+    
+    private func saveWinners() {
+        NSKeyedArchiver.archiveRootObject(winners, toFile: winnersFile())
+    }
+    
+    private func winnersFile() -> String {
+        let documentsDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        return (documentsDir as NSString).stringByAppendingPathComponent("winners.obj")
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
