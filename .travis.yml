@@ -5,4 +5,4 @@ before_install:
   - bundle
 
 script:
-  - bundle exec scan
+  - bundle exec scan --device "iPhone 6s" --clean
