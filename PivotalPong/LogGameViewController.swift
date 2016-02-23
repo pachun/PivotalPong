@@ -47,7 +47,7 @@ class LogGameViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "PlayerCell")
         }
         
-        cell.textLabel!.text = players[indexPath.row].name
+        cell.textLabel?.text = players[indexPath.row].name
         
         return cell
     }

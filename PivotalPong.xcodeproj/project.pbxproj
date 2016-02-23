@@ -11,6 +11,7 @@
 		AE133D421C7BA53200662DDC /* RecentGamesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE133D411C7BA53200662DDC /* RecentGamesUITests.swift */; };
 		AE133D441C7BADE100662DDC /* LogGameDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE133D431C7BADE100662DDC /* LogGameDelegate.swift */; };
 		AE133D451C7BBAB400662DDC /* LogGameDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE133D431C7BADE100662DDC /* LogGameDelegate.swift */; };
+		AE30E6A71C7CB85C00A66B93 /* LogGameViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE30E6A61C7CB85C00A66B93 /* LogGameViewControllerTests.swift */; };
 		AE4630F61C7B5ACF0094A8EB /* PlayerServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4630F51C7B5ACF0094A8EB /* PlayerServiceDelegate.swift */; };
 		AE4630F71C7B5ACF0094A8EB /* PlayerServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4630F51C7B5ACF0094A8EB /* PlayerServiceDelegate.swift */; };
 		AE4630F91C7B5B2C0094A8EB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4630F81C7B5B2C0094A8EB /* Player.swift */; };
@@ -30,7 +31,6 @@
 		AEF43F3F1C77B335004613F7 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF43F3E1C77B335004613F7 /* Nimble.framework */; };
 		AEF43F411C77B337004613F7 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF43F401C77B337004613F7 /* Quick.framework */; };
 		AEF43F451C77BA8A004613F7 /* PlayerServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF43F441C77BA8A004613F7 /* PlayerServiceTests.swift */; };
-		AEF43F471C77BBC5004613F7 /* AllPlayers.json in Resources */ = {isa = PBXBuildFile; fileRef = AEF43F461C77BBC5004613F7 /* AllPlayers.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +54,7 @@
 		AE133D3B1C7B9AD400662DDC /* LogGameUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogGameUITests.swift; sourceTree = "<group>"; };
 		AE133D411C7BA53200662DDC /* RecentGamesUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentGamesUITests.swift; sourceTree = "<group>"; };
 		AE133D431C7BADE100662DDC /* LogGameDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogGameDelegate.swift; sourceTree = "<group>"; };
+		AE30E6A61C7CB85C00A66B93 /* LogGameViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogGameViewControllerTests.swift; sourceTree = "<group>"; };
 		AE4630F51C7B5ACF0094A8EB /* PlayerServiceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerServiceDelegate.swift; sourceTree = "<group>"; };
 		AE4630F81C7B5B2C0094A8EB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		AE4630FB1C7B5BCC0094A8EB /* PlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerService.swift; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		AEF43F401C77B337004613F7 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		AEF43F421C77BA57004613F7 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		AEF43F441C77BA8A004613F7 /* PlayerServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerServiceTests.swift; sourceTree = "<group>"; };
-		AEF43F461C77BBC5004613F7 /* AllPlayers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AllPlayers.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,7 +191,7 @@
 			children = (
 				AEF43F261C77A893004613F7 /* Info.plist */,
 				AEF43F441C77BA8A004613F7 /* PlayerServiceTests.swift */,
-				AEF43F461C77BBC5004613F7 /* AllPlayers.json */,
+				AE30E6A61C7CB85C00A66B93 /* LogGameViewControllerTests.swift */,
 			);
 			path = PivotalPongTests;
 			sourceTree = "<group>";
@@ -320,7 +320,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEF43F471C77BBC5004613F7 /* AllPlayers.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE30E6A71C7CB85C00A66B93 /* LogGameViewControllerTests.swift in Sources */,
 				AE4630FD1C7B5BCC0094A8EB /* PlayerService.swift in Sources */,
 				AEF43F451C77BA8A004613F7 /* PlayerServiceTests.swift in Sources */,
 				AE4630FA1C7B5B2C0094A8EB /* Player.swift in Sources */,
