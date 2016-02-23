@@ -2,4 +2,4 @@ language: objective-c
 osx_image: xcode7.2
 
 script:
-- ./ci/run_tests.sh
+  - ./ci/run_tests.sh
