@@ -6,4 +6,4 @@ before_install:
   - bundle
 
 script:
-  - bundle exec scan --device "iPhone 6s" --scheme "PivotalPong" --clean
+  - bundle exec scan --destination "platform=iOS Simulator,id=BC51025F-C0C7-411B-8901-56B2A70797A0,OS=9.2,name=iPhone 6s" --scheme "PivotalPong" --clean
