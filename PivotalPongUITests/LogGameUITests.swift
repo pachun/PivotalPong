@@ -6,6 +6,7 @@ class LogGameUITests: XCTestCase {
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
+        app.launchEnvironment = ["resetData":"1"]
         app.launch()
         app.buttons["Create Game"].tap()
     }

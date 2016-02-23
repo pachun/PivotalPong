@@ -14,6 +14,7 @@ class RecentGamesUITests: XCTestCase {
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
+        app.launchEnvironment = ["resetData":"1"]
         app.launch()
     }
     
@@ -55,6 +56,7 @@ class RecentGamesUITests: XCTestCase {
         XCTAssert(app.cells.staticTexts["Shanfan is a ruler!!"].exists)
         
         app.terminate()
+        app.launchEnvironment = [:]
         app.launch()
         
         XCTAssert(app.cells.staticTexts["Shanfan is a ruler!!"].exists)

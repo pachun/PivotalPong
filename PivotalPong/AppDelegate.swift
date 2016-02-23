@@ -15,14 +15,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+     
+        #if DEBUG
+            let env = NSProcessInfo.processInfo().environment
+            if env["resetData"] != nil {
+                resetData()
+            }
+        #endif
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        
         let recentGamesViewController = RecentGamesViewController(playerService:PlayerService())
-        
         window?.rootViewController = recentGamesViewController
         window?.makeKeyAndVisible()
         
         return true
     }
+    
+    #if DEBUG
+    func resetData() {
+        let documentsDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        
+        let fileManager = NSFileManager.defaultManager()
+        
+        let dataFile = (documentsDir as NSString).stringByAppendingPathComponent("winners.obj")
+        
+        if fileManager.fileExistsAtPath(dataFile) {
+            print("Removing data file at: \(dataFile)")
+            do {
+                try fileManager.removeItemAtPath(dataFile)
+            } catch {
+                print("Yo it died: \(error)")
+            }
+        }
+    }
+    #endif
 }
