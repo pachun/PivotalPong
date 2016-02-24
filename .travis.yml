@@ -4,6 +4,27 @@ xcode_sdk: iphonesimulator9.2
 before_install:
 - carthage update --platform ios
 - bundle
+before_script:
+- openssl aes-256-cbc -k "$KEY_PASSWORD" -in ci/certs/AdHocDistCert.cer.enc -d -a
+  -out ci/certs/AdHocDistCert.cer
+- openssl aes-256-cbc -k "$KEY_PASSWORD" -in ci/certs/AdHocDistCertKey.p12.enc -d
+  -a -out ci/certs/AdHocDistCertKey.p12
+- openssl aes-256-cbc -k "$KEY_PASSWORD" -in ci/profile/PivotalPongAdHocProfile.mobileprovision.enc
+  -d -a -out ci/profile/PivotalPongAdHocProfile.mobileprovision
+- ci/scripts/create_travis_keychain.sh
 script:
 - bundle exec scan --destination "platform=iOS Simulator,OS=9.2,name=iPhone 6s" --scheme
   "PivotalPong" --clean
+after_success:
+- ci/scripts/build.sh
+- ci/scripts/deploy.sh
+after_script:
+- ci/scripts/delete_travis_keychain.sh
+env:
+  global:
+  - APP_NAME="PivotalPong"
+  - 'DEVELOPER_NAME="iPhone Distribution: Nicholas Pachulski (ARE387ZNXS)"'
+  - PROFILE_NAME="PivotalPongAdHocProfile"
+  - secure: DlG831hvu4OE+bjhH/HSMRNFQz6dM/43uiiI9pEeeQcnr3DqwQ/VApmqqd45sLJ1MSO5W6ONc/UUIUHsK6nBeeBTRkooXBJhaj1yUeWg/YPFIbzd1sANrFYZD0zPr8qCWbdwfpXmHPY8voBiv97Saufk2jw8cvQYQFeQfhB8MJKq6sEA+aTwQm1x2xSxHp7LNQj8ag7N7/bjCvBQYrRRrPvU/hxmGoR9Jf8zRmy96IPz2OzJmx8ArB4zx/47Qxg9R+pkMrYnBqRexM6vM/m640hCs77li/6hDZJC5SZ1KPH4I4IIjpvTEaVLcrhWLF5eav92vgnI+NN6fv48lTb9BkvHu/DIGWneh71ABWn12TEqG3ZJGOFTUZqZkiyG/ox8/6woTr5TEWFoB5W+5f2tYA92OoK6AMW3QcLHRV+LSYNFhquk/gQBX7/NM5hIAtHnDl7p/k9vzfvhk+NjRlhSovu8OuuBrZH/Bfa5MwFesmkTgYJhfdKvWN1xzKJkxk6XU26dpq6I8suNjPK9fm4Exa5K3PcX3rzgv9tm0kUaTVmxR8sq1ZIfpujHKvGEFRoqu2uPs3bkLYgP7vCbm8rNyN6cXuSw6yJDitwXiTITOIiPcDg2MOj0lUyXXLX2I6wI3BEoPeV/wDXybwWltiRmx7W1UtY0jQtkEfTSIqXlwk8=
+  - secure: Ave4MTxChCvjNh++c/3CJO/gHF4pJGDXkww3sza0S0kI+2n6MTx+TlPo0qbxeODeVWpL/KK3/SQm+AcTME0Zju1wv6W29OP/4YTBv2dDs1pwmr0ZOo+/JiBbNNfE7mwYzf/ka7ThFEHviZOYVAqcFH+GGo0mgLEltA9lLMmwy+Z2Aq5cq4BPjePRSKXuPyF1Jsc+XioEh/JrFUQIxmO5t81wdBkvazTwtDGSrNW/nzuH5cUDmJwi76Xp5t8OeDmKMAAqfA/1H2cjVdXyEpY4IYqI6h/qU+YBCxmZFkYcw3ritdKS4PaIA6oxZ5870/xGfgLKFhzdCe7NK17Day21bW/OF7losZiGozSqe4IRy1ZzfB91wF52NHe4kn5uGRuXAVHikDdO/qTOo/UbXwuuObJXiUH98aCPHfh9MyELrnEZjhvMxKiObQZ9uf44WV9ntE3dSO0EGxk0I4eVabrKHZ6SB5S0Frmte7OrswWrncaAo8p6W/tzkzJf+76oIUgB1UhjqNPQBVqk7rlcfaryKXypEaaLe/tgbft3ZcMAAObgLnVH3K9sA0Mc7h+1uGIVub1bXOLe06yeZaP0NvnNK2d4IaiTeBC+KY6LF2d0F0M3uDa5u0hruqrWFYN6qAScKuJkn+xknfTgA6oE3i8d4+uCjhVyrsZkJNEp80TdT0k=
+  - secure: ipBoCw9MX9ZlRBIFPRsnC58lYMtyHK+qXEJHRybTNp+4nOI9hCeo6qj2kEGqVnaWF5oYKDyjo2XSBjVZK7I0GSaJs8WhV0HBGYpL9/3qEwt5zdV5SDnQOOZ70HqYVrhrfAOMVB60IozRwTeYj1lVJoxWl1ooGoVIxLRzAw1PrkmXoMVRIgUqFcXMM0jEMW/Xo72XRStOmlIy5vwU6VhC251PVsJZtb35S7tr8RK4mL5aSoHm2zIHG0Co1o6n5akXn70eTFDVr9yqlg2LxyGrNiCLcV/rNHmvcsYjllQhzmSWtI/D6KRT8sEjcn71gph6ciYnyg5DQQBB/GcNvdgIyl1WCI4hYXQ3xNLevpR9+SPVZB6aJ9r5lwE7AS/IBZQDKZPOSlU6Okpz2lal9yuhzAzbO4ph712+rCnQyJJEhHWYcdRN3lNPYIqbbyVbR1iLQS0jAtkQD6F+gbDQCUk1CkyeJxC4wrIz9VZuQyeduLqLl0qhsUlvTHXZx2GekK+W39JbpOQ5JA0JYLwCsFghLzLgT8AAXrxvLTDdC6XEoidz6f0uC/ZuwedDGwjPc7ESFSsIIsX6rYu7H4KgIVVFul4izqM+i69VVBu0dlNL2qp5tMcnhYmWtVG+sQ7s7d/vgV/QCoPlYzOBng4J7cKDUMd3hjjWd7Diq4NOhnYPT0E=
