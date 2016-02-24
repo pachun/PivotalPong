@@ -1,10 +1,9 @@
 language: objective-c
 osx_image: xcode7.2
 xcode_sdk: iphonesimulator9.2
-
 before_install:
-  - carthage update --platform ios
-  - bundle
-
+- carthage update --platform ios
+- bundle
 script:
-  - bundle exec scan --destination "platform=iOS Simulator,OS=9.2,name=iPhone 6s" --scheme "PivotalPong" --clean
+- bundle exec scan --destination "platform=iOS Simulator,OS=9.2,name=iPhone 6s" --scheme
+  "PivotalPong" --clean
